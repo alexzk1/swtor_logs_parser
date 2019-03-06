@@ -58,7 +58,7 @@ public class StartCombatLog {
 			}
 		}
 		
-		ChartFactory.setChartTheme(new StandardChartTheme("JFree/Shadow", true));
+		ChartFactory.setChartTheme(new StandardChartTheme("JFree/Shadow"));
 		
 		try {
 			Configuration.getInstance().loadProperties();

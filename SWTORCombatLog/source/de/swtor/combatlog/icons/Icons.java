@@ -6,7 +6,7 @@ package de.swtor.combatlog.icons;
 
 import javax.swing.ImageIcon;
 
-public interface Icons {
+public class Icons {
 	public final static ImageIcon SPLASH_SCREEN = new ImageIcon(Icons.class.getResource("SplashScreen.png"));	
 	
 	public final static ImageIcon OPEN_FOLDER = new ImageIcon(Icons.class.getResource("Folder.png"));	

@@ -56,15 +56,15 @@ public class Configuration {
 			
 			properties.storeToXML(propOutFile, comments);	
 		} catch (FileNotFoundException e) {
-			StartCombatLog.getLogger().log(Level.SEVERE, "Can’t find " + CONFIG_FILE_NAME, e);
+			StartCombatLog.getLogger().log(Level.SEVERE, "Canï¿½t find " + CONFIG_FILE_NAME, e);
 		} catch (IOException e) {	
-			StartCombatLog.getLogger().log(Level.SEVERE, "Can’t save properties to " + CONFIG_FILE_NAME, e);
+			StartCombatLog.getLogger().log(Level.SEVERE, "Canï¿½t save properties to " + CONFIG_FILE_NAME, e);
 		} finally {
 			if (null != propOutFile) {
 				try {
 					propOutFile.close();
 				} catch (IOException e) {
-					StartCombatLog.getLogger().log(Level.SEVERE, "Can’t close config file " + CONFIG_FILE_NAME, e);
+					StartCombatLog.getLogger().log(Level.SEVERE, "Canï¿½t close config file " + CONFIG_FILE_NAME, e);
 				}
 			}
 		}
@@ -80,11 +80,11 @@ public class Configuration {
 			
 			fillRecentFileStack();
 		} catch (FileNotFoundException e) {
-			throw new Exception("Can’t find " + CONFIG_FILE_NAME, e);
+			//throw new Exception("Cannot find " + CONFIG_FILE_NAME, e);
 		} catch (InvalidPropertiesFormatException e) {
 			throw new Exception("The property format is wrong!", e);
 		} catch (IOException e) {
-			throw new Exception("Can’t load properties from " + CONFIG_FILE_NAME, e);
+			throw new Exception("Cannot load properties from " + CONFIG_FILE_NAME, e);
 		} finally {
 			if (null != propInFile) {
 				propInFile.close();
