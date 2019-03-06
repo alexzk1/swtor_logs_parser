@@ -1,215 +1,248 @@
 package de.swtor.combatlog.analyzer;
 
+import de.swtor.combatlog.Utilities;
+import de.swtor.combatlog.data.*;
+
 import java.math.BigDecimal;
 import java.util.List;
-
-import de.swtor.combatlog.Utilities;
-import de.swtor.combatlog.data.AbsorbedDamage;
-import de.swtor.combatlog.data.CalculatedResult;
-import de.swtor.combatlog.data.Damage;
-import de.swtor.combatlog.data.DataStore;
-import de.swtor.combatlog.data.Death;
-import de.swtor.combatlog.data.Fight;
-import de.swtor.combatlog.data.Heal;
-import de.swtor.combatlog.data.HumanPlayerCharacter;
 
 /*
  * Copyright (c) 2012 Thomas Rath
  */
 
-public class MasterAnalyzer {
+public class MasterAnalyzer
+{
 
-	private DamageAnalyzer damageAnalyzer = new DamageAnalyzer();
-	private HealAnalyzer healAnalyzer = new HealAnalyzer();
+    private DamageAnalyzer damageAnalyzer = new DamageAnalyzer();
+    private HealAnalyzer healAnalyzer = new HealAnalyzer();
 
-	private int totalHeal = 0;
-	private int totalDamage = 0;
-	private int totalDamageTime = 0;
-	private int totalHealTime = 0;
+    private int totalHeal = 0;
+    private int totalDamage = 0;
+    private int totalDamageTime = 0;
+    private int totalHealTime = 0;
 
-	public MasterAnalyzer() {
-	}
+    public MasterAnalyzer()
+    {
+    }
 
-	public void calculateAllResults(String userName) {
-		totalHeal = 0;
-		totalDamage = 0;
-		totalDamageTime = 0;
-		totalHealTime = 0;
-		
-		DataStore.calculatedResult = calculateResult(DataStore.mainHumanPlayerName, null);
+    public void calculateAllResults(String userName)
+    {
+        totalHeal = 0;
+        totalDamage = 0;
+        totalDamageTime = 0;
+        totalHealTime = 0;
 
-		for (Fight fight : DataStore.fights) {
-			fight.setCalculatedResult(calculateResult(DataStore.mainHumanPlayerName, fight));
-		}
+        DataStore.calculatedResult = calculateResult(DataStore.mainHumanPlayerName, null);
 
-		calculateFightValues();
-		
-		calculateTotalHPSDPS();
-	}
+        for (Fight fight : DataStore.fights)
+        {
+            fight.setCalculatedResult(calculateResult(DataStore.mainHumanPlayerName, fight));
+        }
 
-	private CalculatedResult calculateResult(String username, Fight fight) {
-		CalculatedResult calculatedResult = new CalculatedResult();
+        calculateFightValues();
 
-		calculatedResult.setDamageDealed(damageAnalyzer.summerizeDamageDealedForUser(username, fight));
-		calculatedResult.setDamageReceived(damageAnalyzer.summerizeDamageReceivedForUser(username, fight));
-		calculatedResult.setHealedDealed(healAnalyzer.summerizeHealedForUser(username, fight));
-		calculatedResult.setHealingReceived(healAnalyzer.summerizeHealingReceivedForUser(username, fight));
-		calculatedResult.setDeaths(calculateKillsDeathsList(username, fight));
-		calculatedResult.setAbsorbedDamages(calculateAbsorbedDamageList(username, fight));
+        calculateTotalHPSDPS();
+    }
 
-		return calculatedResult;
-	}
+    private CalculatedResult calculateResult(String username, Fight fight)
+    {
+        CalculatedResult calculatedResult = new CalculatedResult();
 
-	private void calculateFightValues() {
-		for (Fight fight : DataStore.fights) {
-			long seconds = calculateSeconds(fight);
-			calculateHPS(fight, seconds);
-			calculateDPS(fight, seconds);
-			calculateTargets(fight);
-		}
-	}
+        calculatedResult.setDamageDealed(damageAnalyzer.summerizeDamageDealedForUser(username, fight));
+        calculatedResult.setDamageReceived(damageAnalyzer.summerizeDamageReceivedForUser(username, fight));
+        calculatedResult.setHealedDealed(healAnalyzer.summerizeHealedForUser(username, fight));
+        calculatedResult.setHealingReceived(healAnalyzer.summerizeHealingReceivedForUser(username, fight));
+        calculatedResult.setDeaths(calculateKillsDeathsList(username, fight));
+        calculatedResult.setAbsorbedDamages(calculateAbsorbedDamageList(username, fight));
 
-	private void calculateTotalHPSDPS() {
-		// total dps
-		if (totalDamageTime > 0) {
-			BigDecimal calulator = new BigDecimal(totalDamage);
-			calulator = calulator.divide(BigDecimal.valueOf(totalDamageTime), 2, BigDecimal.ROUND_HALF_EVEN);
-			DataStore.totalDPS = calulator.doubleValue();
-		} else {
-			DataStore.totalDPS = 0;
-		}
+        return calculatedResult;
+    }
 
-		// total hps
-		if (totalHealTime > 0) {
-			BigDecimal calulator = new BigDecimal(totalHeal);
-			calulator = calulator.divide(BigDecimal.valueOf(totalHealTime), 2, BigDecimal.ROUND_HALF_EVEN);
-			DataStore.totalHPS = calulator.doubleValue();
-		} else {
-			DataStore.totalHPS = 0;
-		}
-	}
+    private void calculateFightValues()
+    {
+        for (Fight fight : DataStore.fights)
+        {
+            long seconds = calculateSeconds(fight);
+            calculateHPS(fight, seconds);
+            calculateDPS(fight, seconds);
+            calculateTargets(fight);
+        }
+    }
 
-	private long calculateSeconds(Fight fight) {
-		long seconds = 0;
+    private void calculateTotalHPSDPS()
+    {
+        // total dps
+        if (totalDamageTime > 0)
+        {
+            BigDecimal calulator = new BigDecimal(totalDamage);
+            calulator = calulator.divide(BigDecimal.valueOf(totalDamageTime), 2, BigDecimal.ROUND_HALF_EVEN);
+            DataStore.totalDPS = calulator.doubleValue();
+        } else
+        {
+            DataStore.totalDPS = 0;
+        }
 
-		if (null != fight.getEndDate() && null != fight.getStartDate()) {
-			seconds = fight.getEndDate().getTime() - fight.getStartDate().getTime();
-		}
+        // total hps
+        if (totalHealTime > 0)
+        {
+            BigDecimal calulator = new BigDecimal(totalHeal);
+            calulator = calulator.divide(BigDecimal.valueOf(totalHealTime), 2, BigDecimal.ROUND_HALF_EVEN);
+            DataStore.totalHPS = calulator.doubleValue();
+        } else
+        {
+            DataStore.totalHPS = 0;
+        }
+    }
 
-		return seconds / 1000;
-	}
+    private long calculateSeconds(Fight fight)
+    {
+        long seconds = 0;
 
-	private void calculateHPS(Fight fight, long seconds) {
-		double hps = 0;
+        if (null != fight.getEndDate() && null != fight.getStartDate())
+        {
+            seconds = fight.getEndDate().getTime() - fight.getStartDate().getTime();
+        }
 
-		if (seconds > 0) {
-			HumanPlayerCharacter character = fight.findHumanPlayerCharacter(DataStore.mainHumanPlayerName);
+        return seconds / 1000;
+    }
 
-			if (null != character) {
-				// count time only if the char done something
-				if (!character.getHealDealed().isEmpty()) {
-					totalHealTime += seconds;
-				}
+    private void calculateHPS(Fight fight, long seconds)
+    {
+        double hps = 0;
 
-				for (Heal heal : character.getHealDealed()) {
-					hps += heal.getValue();
-					totalHeal += heal.getValue();
-				}
+        if (seconds > 0)
+        {
+            HumanPlayerCharacter character = fight.findHumanPlayerCharacter(DataStore.mainHumanPlayerName);
 
-				BigDecimal calulator = new BigDecimal(hps);
-				calulator = calulator.divide(BigDecimal.valueOf(seconds), 2, BigDecimal.ROUND_HALF_EVEN);
-				hps = calulator.doubleValue();
-			}
-		}
+            if (null != character)
+            {
+                // count time only if the char done something
+                if (!character.getHealDealed().isEmpty())
+                {
+                    totalHealTime += seconds;
+                }
 
-		fight.setHps(hps);
-	}
+                for (Heal heal : character.getHealDealed())
+                {
+                    hps += heal.getValue();
+                    totalHeal += heal.getValue();
+                }
 
-	private void calculateDPS(Fight fight, long seconds) {
-		double dps = 0;
+                BigDecimal calulator = new BigDecimal(hps);
+                calulator = calulator.divide(BigDecimal.valueOf(seconds), 2, BigDecimal.ROUND_HALF_EVEN);
+                hps = calulator.doubleValue();
+            }
+        }
 
-		if (seconds > 0) {
-			HumanPlayerCharacter character = fight.findHumanPlayerCharacter(DataStore.mainHumanPlayerName);
+        fight.setHps(hps);
+    }
 
-			if (null != character) {
-				// count time only if the char done something
-				if (!character.getDamageDealed().isEmpty()) {
-					totalDamageTime += seconds;
-				}
+    private void calculateDPS(Fight fight, long seconds)
+    {
+        double dps = 0;
 
-				for (Damage damage : character.getDamageDealed()) {
-					dps += damage.getValue();
-					totalDamage += damage.getValue();
-				}
+        if (seconds > 0)
+        {
+            HumanPlayerCharacter character = fight.findHumanPlayerCharacter(DataStore.mainHumanPlayerName);
 
-				BigDecimal calulator = new BigDecimal(dps);
-				calulator = calulator.divide(BigDecimal.valueOf(seconds), 2, BigDecimal.ROUND_HALF_EVEN);
-				dps = calulator.doubleValue();
-			}
-		}
+            if (null != character)
+            {
+                // count time only if the char done something
+                if (!character.getDamageDealed().isEmpty())
+                {
+                    totalDamageTime += seconds;
+                }
 
-		fight.setDps(dps);
-	}
+                for (Damage damage : character.getDamageDealed())
+                {
+                    dps += damage.getValue();
+                    totalDamage += damage.getValue();
+                }
 
-	private void calculateTargets(Fight fight) {
-		String targets = "";
+                BigDecimal calulator = new BigDecimal(dps);
+                calulator = calulator.divide(BigDecimal.valueOf(seconds), 2, BigDecimal.ROUND_HALF_EVEN);
+                dps = calulator.doubleValue();
+            }
+        }
 
-		HumanPlayerCharacter character = fight.findHumanPlayerCharacter(DataStore.mainHumanPlayerName);
-		if (null != character) {
-			for (Damage damage : character.getDamageDealed()) {
-				String targetName = "";
-				if (null != damage.getToCharacter()) {
-					targetName = Utilities.displayName(damage.getToCharacter().getName());
-				}
+        fight.setDps(dps);
+    }
 
-				// if a user dies during a fight, he sometime is listed as
-				// target
-				if (!targetName.equals(DataStore.mainHumanPlayerName)) {
-					if (targets.indexOf(targetName) < 0) {
-						if (targets.length() > 0) {
-							targets = targets + ";" + targetName;
-						} else {
-							targets = targetName;
-						}
-					}
-				}
-			}
-		}
+    private void calculateTargets(Fight fight)
+    {
+        String targets = "";
 
-		fight.setTargets(targets);
-	}
+        HumanPlayerCharacter character = fight.findHumanPlayerCharacter(DataStore.mainHumanPlayerName);
+        if (null != character)
+        {
+            for (Damage damage : character.getDamageDealed())
+            {
+                String targetName = "";
+                if (null != damage.getToCharacter())
+                {
+                    targetName = Utilities.displayName(damage.getToCharacter().getName());
+                }
 
-	private List<Death> calculateKillsDeathsList(String userName, Fight fight) {
-		List<Death> result = null;
+                // if a user dies during a fight, he sometime is listed as
+                // target
+                if (!targetName.equals(DataStore.mainHumanPlayerName))
+                {
+                    if (targets.indexOf(targetName) < 0)
+                    {
+                        if (targets.length() > 0)
+                        {
+                            targets = targets + ";" + targetName;
+                        } else
+                        {
+                            targets = targetName;
+                        }
+                    }
+                }
+            }
+        }
 
-		HumanPlayerCharacter humanPlayerCharacter;
-		if (null != fight) {
-			humanPlayerCharacter = fight.findHumanPlayerCharacter(userName);
-		} else {
-			humanPlayerCharacter = DataStore.findHumanPlayerCharacter(userName);
-		}
+        fight.setTargets(targets);
+    }
 
-		if (null != humanPlayerCharacter) {
-			result = humanPlayerCharacter.getDeads();
-		}
+    private List<Death> calculateKillsDeathsList(String userName, Fight fight)
+    {
+        List<Death> result = null;
 
-		return result;
-	}
+        HumanPlayerCharacter humanPlayerCharacter;
+        if (null != fight)
+        {
+            humanPlayerCharacter = fight.findHumanPlayerCharacter(userName);
+        } else
+        {
+            humanPlayerCharacter = DataStore.findHumanPlayerCharacter(userName);
+        }
 
-	private List<AbsorbedDamage> calculateAbsorbedDamageList(String userName, Fight fight) {
-		List<AbsorbedDamage> result = null;
+        if (null != humanPlayerCharacter)
+        {
+            result = humanPlayerCharacter.getDeads();
+        }
 
-		HumanPlayerCharacter humanPlayerCharacter;
-		if (null != fight) {
-			humanPlayerCharacter = fight.findHumanPlayerCharacter(userName);
-		} else {
-			humanPlayerCharacter = DataStore.findHumanPlayerCharacter(userName);
-		}
+        return result;
+    }
 
-		if (null != humanPlayerCharacter) {
-			result = humanPlayerCharacter.getDamageAbsorbed();
-		}
+    private List<AbsorbedDamage> calculateAbsorbedDamageList(String userName, Fight fight)
+    {
+        List<AbsorbedDamage> result = null;
 
-		return result;
-	}
+        HumanPlayerCharacter humanPlayerCharacter;
+        if (null != fight)
+        {
+            humanPlayerCharacter = fight.findHumanPlayerCharacter(userName);
+        } else
+        {
+            humanPlayerCharacter = DataStore.findHumanPlayerCharacter(userName);
+        }
+
+        if (null != humanPlayerCharacter)
+        {
+            result = humanPlayerCharacter.getDamageAbsorbed();
+        }
+
+        return result;
+    }
 }

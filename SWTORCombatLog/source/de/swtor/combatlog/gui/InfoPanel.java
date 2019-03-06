@@ -4,25 +4,24 @@ package de.swtor.combatlog.gui;
  * Copyright (c) 2012 Thomas Rath
  */
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import de.swtor.combatlog.configuration.Configuration;
 import de.swtor.combatlog.icons.Icons;
 
+import javax.swing.*;
+import java.awt.*;
+
 @SuppressWarnings("serial")
-public class InfoPanel extends JPanel {
-    public InfoPanel() {
+public class InfoPanel extends JPanel
+{
+    public InfoPanel()
+    {
         super();
 
         init();
     }
 
-    private void init() {
+    private void init()
+    {
         setLayout(new GridBagLayout());
 
         JLabel picture = new JLabel(Icons.SPLASH_SCREEN);
@@ -33,10 +32,10 @@ public class InfoPanel extends JPanel {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 1;
         gridBagConstraints.gridheight = 1;
-        gridBagConstraints.insets = new Insets(5,0,0,0);
+        gridBagConstraints.insets = new Insets(5, 0, 0, 0);
         gridBagConstraints.anchor = GridBagConstraints.CENTER;
 
-        add(new JLabel(Configuration.APP_NAME + " - Version "+Configuration.VERSION), gridBagConstraints);
+        add(new JLabel(Configuration.APP_NAME + " - Version " + Configuration.VERSION), gridBagConstraints);
 
         gridBagConstraints.gridy = 1;
 

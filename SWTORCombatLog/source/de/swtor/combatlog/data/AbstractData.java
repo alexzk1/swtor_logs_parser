@@ -6,59 +6,70 @@ package de.swtor.combatlog.data;
 
 import java.util.Date;
 
-public abstract class AbstractData {
+public abstract class AbstractData
+{
 
-	public enum Event {EVENT, APPLY_EFFECT, REMOVE_EFFECT, DAMAGE, ABSORBED_DAMAGE, FALLING_DAMAGE, HEAL, RESTORE, CONSUME, DEAD, FIGHT_BEGIN, FIGHT_END};
-	
-	private String name;
-		
-	private Date date;
-	
-	private Event event;
-	
-	private AbstractCharacter fromCharacter;
-	
-	private AbstractCharacter toCharacter;
-	
-	private String sortString = null;
+    private String name;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    ;
+    private Date date;
+    private Event event;
+    private AbstractCharacter fromCharacter;
+    private AbstractCharacter toCharacter;
+    private String sortString = null;
 
-	public String getName() {
-		return name;
-	}
+    public String getName()
+    {
+        return name;
+    }
 
-	public Date getDate() {
-		return date;
-	}
+    public void setName(String name)
+    {
+        this.name = name;
+    }
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
+    public Date getDate()
+    {
+        return date;
+    }
 
-	public Event getEvent() {
-		return event;
-	}
+    public void setDate(Date date)
+    {
+        this.date = date;
+    }
 
-	public void setEvent(Event event) {
-		this.event = event;
-	}
+    public Event getEvent()
+    {
+        return event;
+    }
 
-	public AbstractCharacter getFromCharacter() {
-		return fromCharacter;
-	}
+    public void setEvent(Event event)
+    {
+        this.event = event;
+    }
 
-	public void setFromCharacter(AbstractCharacter fromCharacter) {
-		this.fromCharacter = fromCharacter;
-	}
+    public AbstractCharacter getFromCharacter()
+    {
+        return fromCharacter;
+    }
 
-	public AbstractCharacter getToCharacter() {
-		return toCharacter;
-	}
+    public void setFromCharacter(AbstractCharacter fromCharacter)
+    {
+        this.fromCharacter = fromCharacter;
+    }
 
-	public void setToCharacter(AbstractCharacter toCharacter) {
-		this.toCharacter = toCharacter;
-	}
+    public AbstractCharacter getToCharacter()
+    {
+        return toCharacter;
+    }
+
+    public void setToCharacter(AbstractCharacter toCharacter)
+    {
+        this.toCharacter = toCharacter;
+    }
+
+    public enum Event
+    {
+        EVENT, APPLY_EFFECT, REMOVE_EFFECT, DAMAGE, ABSORBED_DAMAGE, FALLING_DAMAGE, HEAL, RESTORE, CONSUME, DEAD, FIGHT_BEGIN, FIGHT_END
+    }
 }

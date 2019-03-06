@@ -4,20 +4,24 @@ package de.swtor.combatlog.data;
  * Copyright (c) 2012 Thomas Rath
  */
 
-public class AbsorbedDamage extends AbstractValuedData {
-	
-	private int damageValue;
+public class AbsorbedDamage extends AbstractValuedData
+{
 
-	public AbsorbedDamage(String name) {
-		setName(name);
-		setEvent(Event.ABSORBED_DAMAGE);
-	}
+    private int damageValue;
 
-	public int getDamageValue() {
-		return damageValue;
-	}
+    public AbsorbedDamage(String name)
+    {
+        setName(name);
+        setEvent(Event.ABSORBED_DAMAGE);
+    }
 
-	public void setDamageValue(int damageValue) {
-		this.damageValue = damageValue;
-	}	
+    public int getDamageValue()
+    {
+        return damageValue;
+    }
+
+    public void setDamageValue(int damageValue)
+    {
+        this.damageValue = damageValue;
+    }
 }

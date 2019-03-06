@@ -4,16 +4,8 @@
 
 package de.swtor.combatlog.gui;
 
-import java.awt.BorderLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
+import javax.swing.*;
+import java.awt.*;
 
 /*
  * Copyright (c) 2012 Thomas Rath
@@ -22,88 +14,95 @@ import javax.swing.ListSelectionModel;
 /**
  * @author User #13
  */
-public class OverviewPanel extends JPanel {
-	public OverviewPanel() {
-		initComponents();
-	}
+public class OverviewPanel extends JPanel
+{
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JSplitPane splitPane;
+    private JPanel overviewPanel;
+    private JScrollPane scrollPane1;
+    private JTable fightTable;
+    private JPanel chartPanel;
+    private JPanel detailPanel;
 
-	public JSplitPane getSplitPane() {
-		return splitPane;
-	}
+    public OverviewPanel()
+    {
+        initComponents();
+    }
 
-	public JTable getFightTable() {
-		return fightTable;
-	}
+    public JSplitPane getSplitPane()
+    {
+        return splitPane;
+    }
 
-	public JPanel getDetailPanel() {
-		return detailPanel;
-	}
+    public JTable getFightTable()
+    {
+        return fightTable;
+    }
 
-	public JPanel getChartPanel() {
-		return chartPanel;
-	}
+    public JPanel getDetailPanel()
+    {
+        return detailPanel;
+    }
 
-	private void initComponents() {
-		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-		splitPane = new JSplitPane();
-		overviewPanel = new JPanel();
-		scrollPane1 = new JScrollPane();
-		fightTable = new JTable();
-		chartPanel = new JPanel();
-		detailPanel = new JPanel();
+    public JPanel getChartPanel()
+    {
+        return chartPanel;
+    }
 
-		//======== this ========
-		setLayout(new BorderLayout());
+    private void initComponents()
+    {
+        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        splitPane = new JSplitPane();
+        overviewPanel = new JPanel();
+        scrollPane1 = new JScrollPane();
+        fightTable = new JTable();
+        chartPanel = new JPanel();
+        detailPanel = new JPanel();
 
-		//======== splitPane ========
-		{
-			splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
+        //======== this ========
+        setLayout(new BorderLayout());
 
-			//======== overviewPanel ========
-			{
-				overviewPanel.setLayout(new GridBagLayout());
-				((GridBagLayout)overviewPanel.getLayout()).columnWidths = new int[] {0, 0, 0};
-				((GridBagLayout)overviewPanel.getLayout()).rowHeights = new int[] {0, 0};
-				((GridBagLayout)overviewPanel.getLayout()).columnWeights = new double[] {1.0, 1.0, 1.0E-4};
-				((GridBagLayout)overviewPanel.getLayout()).rowWeights = new double[] {1.0, 1.0E-4};
+        //======== splitPane ========
+        {
+            splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 
-				//======== scrollPane1 ========
-				{
+            //======== overviewPanel ========
+            {
+                overviewPanel.setLayout(new GridBagLayout());
+                ((GridBagLayout) overviewPanel.getLayout()).columnWidths = new int[]{0, 0, 0};
+                ((GridBagLayout) overviewPanel.getLayout()).rowHeights = new int[]{0, 0};
+                ((GridBagLayout) overviewPanel.getLayout()).columnWeights = new double[]{1.0, 1.0, 1.0E-4};
+                ((GridBagLayout) overviewPanel.getLayout()).rowWeights = new double[]{1.0, 1.0E-4};
 
-					//---- fightTable ----
-					fightTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-					scrollPane1.setViewportView(fightTable);
-				}
-				overviewPanel.add(scrollPane1, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
-					GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-					new Insets(0, 0, 0, 5), 0, 0));
+                //======== scrollPane1 ========
+                {
 
-				//======== chartPanel ========
-				{
-					chartPanel.setLayout(new BorderLayout());
-				}
-				overviewPanel.add(chartPanel, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
-					GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-					new Insets(0, 0, 0, 0), 0, 0));
-			}
-			splitPane.setTopComponent(overviewPanel);
+                    //---- fightTable ----
+                    fightTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+                    scrollPane1.setViewportView(fightTable);
+                }
+                overviewPanel.add(scrollPane1, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
+                        GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                        new Insets(0, 0, 0, 5), 0, 0));
 
-			//======== detailPanel ========
-			{
-				detailPanel.setLayout(new BorderLayout());
-			}
-			splitPane.setBottomComponent(detailPanel);
-		}
-		add(splitPane, BorderLayout.CENTER);
-		// JFormDesigner - End of component initialization  //GEN-END:initComponents
-	}
+                //======== chartPanel ========
+                {
+                    chartPanel.setLayout(new BorderLayout());
+                }
+                overviewPanel.add(chartPanel, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
+                        GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                        new Insets(0, 0, 0, 0), 0, 0));
+            }
+            splitPane.setTopComponent(overviewPanel);
 
-	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	private JSplitPane splitPane;
-	private JPanel overviewPanel;
-	private JScrollPane scrollPane1;
-	private JTable fightTable;
-	private JPanel chartPanel;
-	private JPanel detailPanel;
-	// JFormDesigner - End of variables declaration  //GEN-END:variables
+            //======== detailPanel ========
+            {
+                detailPanel.setLayout(new BorderLayout());
+            }
+            splitPane.setBottomComponent(detailPanel);
+        }
+        add(splitPane, BorderLayout.CENTER);
+        // JFormDesigner - End of component initialization  //GEN-END:initComponents
+    }
+    // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

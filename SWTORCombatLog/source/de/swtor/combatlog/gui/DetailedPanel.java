@@ -4,15 +4,8 @@
 
 package de.swtor.combatlog.gui;
 
-import java.awt.BorderLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.*;
+import java.awt.*;
 
 /*
  * Copyright (c) 2012 Thomas Rath
@@ -21,57 +14,62 @@ import javax.swing.JTable;
 /**
  * @author User #13
  */
-public class DetailedPanel extends JPanel {
-	public DetailedPanel() {
-		initComponents();
-	}
+public class DetailedPanel extends JPanel
+{
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JScrollPane scrollPane1;
+    private JTable detailTable;
+    private JPanel panel1;
+    private JButton closeButton;
 
-	public JTable getDetailTable() {
-		return detailTable;
-	}
+    public DetailedPanel()
+    {
+        initComponents();
+    }
 
-	public JButton getCloseButton() {
-		return closeButton;
-	}
+    public JTable getDetailTable()
+    {
+        return detailTable;
+    }
 
-	private void initComponents() {
-		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-		scrollPane1 = new JScrollPane();
-		detailTable = new JTable();
-		panel1 = new JPanel();
-		closeButton = new JButton();
+    public JButton getCloseButton()
+    {
+        return closeButton;
+    }
 
-		//======== this ========
-		setLayout(new BorderLayout());
+    private void initComponents()
+    {
+        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        scrollPane1 = new JScrollPane();
+        detailTable = new JTable();
+        panel1 = new JPanel();
+        closeButton = new JButton();
 
-		//======== scrollPane1 ========
-		{
-			scrollPane1.setViewportView(detailTable);
-		}
-		add(scrollPane1, BorderLayout.CENTER);
+        //======== this ========
+        setLayout(new BorderLayout());
 
-		//======== panel1 ========
-		{
-			panel1.setLayout(new GridBagLayout());
-			((GridBagLayout)panel1.getLayout()).columnWidths = new int[] {0, 0, 0, 0};
-			((GridBagLayout)panel1.getLayout()).rowHeights = new int[] {0, 0};
-			((GridBagLayout)panel1.getLayout()).columnWeights = new double[] {1.0, 0.0, 1.0, 1.0E-4};
-			((GridBagLayout)panel1.getLayout()).rowWeights = new double[] {1.0, 1.0E-4};
+        //======== scrollPane1 ========
+        {
+            scrollPane1.setViewportView(detailTable);
+        }
+        add(scrollPane1, BorderLayout.CENTER);
 
-			//---- closeButton ----
-			closeButton.setText("text");
-			panel1.add(closeButton, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
-				GridBagConstraints.CENTER, GridBagConstraints.NONE,
-				new Insets(5, 5, 5, 5), 0, 0));
-		}
-		add(panel1, BorderLayout.SOUTH);
-		// JFormDesigner - End of component initialization  //GEN-END:initComponents
-	}
+        //======== panel1 ========
+        {
+            panel1.setLayout(new GridBagLayout());
+            ((GridBagLayout) panel1.getLayout()).columnWidths = new int[]{0, 0, 0, 0};
+            ((GridBagLayout) panel1.getLayout()).rowHeights = new int[]{0, 0};
+            ((GridBagLayout) panel1.getLayout()).columnWeights = new double[]{1.0, 0.0, 1.0, 1.0E-4};
+            ((GridBagLayout) panel1.getLayout()).rowWeights = new double[]{1.0, 1.0E-4};
 
-	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	private JScrollPane scrollPane1;
-	private JTable detailTable;
-	private JPanel panel1;
-	private JButton closeButton;
-	// JFormDesigner - End of variables declaration  //GEN-END:variables
+            //---- closeButton ----
+            closeButton.setText("text");
+            panel1.add(closeButton, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
+                    GridBagConstraints.CENTER, GridBagConstraints.NONE,
+                    new Insets(5, 5, 5, 5), 0, 0));
+        }
+        add(panel1, BorderLayout.SOUTH);
+        // JFormDesigner - End of component initialization  //GEN-END:initComponents
+    }
+    // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

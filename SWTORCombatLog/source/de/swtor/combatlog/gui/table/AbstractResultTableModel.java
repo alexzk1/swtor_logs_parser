@@ -4,26 +4,29 @@ package de.swtor.combatlog.gui.table;
  * Copyright (c) 2012 Thomas Rath
  */
 
+import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.table.AbstractTableModel;
+public abstract class AbstractResultTableModel extends AbstractTableModel
+{
 
-public abstract class AbstractResultTableModel extends AbstractTableModel {
+    protected List<Integer> columnsWithNumberValues = new ArrayList<Integer>();
 
-	protected List<Integer> columnsWithNumberValues = new ArrayList<Integer>();
+    public AbstractResultTableModel()
+    {
+        super();
+    }
 
-	public AbstractResultTableModel() {
-		super();
-	}
+    @Override
+    public boolean isCellEditable(int row, int column)
+    {
+        return false;
+    }
 
-	@Override
-	public boolean isCellEditable(int row, int column) {
-		return false;
-	}
-
-	public List<Integer> getColumnsWithNumberValues() {
-		return columnsWithNumberValues;
-	}
+    public List<Integer> getColumnsWithNumberValues()
+    {
+        return columnsWithNumberValues;
+    }
 
 }

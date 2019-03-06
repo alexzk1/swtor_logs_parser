@@ -8,128 +8,154 @@ import java.util.List;
  * Copyright (c) 2012 Thomas Rath
  */
 
-public class Fight {
-	
-	private String name;
-	
-	private String targets;
-	
-	private Date startDate;
-	
-	private Date endDate;
-	
-	private double dps;
-	
-	private double hps;
+public class Fight
+{
 
-	private List<HumanPlayerCharacter> humanPlayerCharacters = new ArrayList<HumanPlayerCharacter>();
-	
-	private List<NonPlayerCharacter> nonPlayerCharacters = new ArrayList<NonPlayerCharacter>();
-	
-	private CalculatedResult calculatedResult;
+    private String name;
 
-	public Fight(String name) {
-		super();
-		this.name = name;
-	}
-	
-	public HumanPlayerCharacter findHumanPlayerCharacter(String name) {
-		HumanPlayerCharacter result = new HumanPlayerCharacter(name);
-		
-		int index = humanPlayerCharacters.indexOf(result);
-		if (index > -1) {
-			result = humanPlayerCharacters.get(index);
-		} else {
-			result = null;
-		}
-		
-		return result;
-	}
-	
-	public NonPlayerCharacter findNonPlayerCharacter(String name) {
-		NonPlayerCharacter result = new NonPlayerCharacter(name);
-		
-		int index = nonPlayerCharacters.indexOf(result);
-		if (index > -1) {
-			result = nonPlayerCharacters.get(index);
-		} else {
-			result = null;
-		}
-		
-		return result;
-	}
+    private String targets;
 
-	public String getName() {
-		return name;
-	}
+    private Date startDate;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    private Date endDate;
 
-	public String getTargets() {
-		return targets;
-	}
+    private double dps;
 
-	public void setTargets(String targets) {
-		this.targets = targets;
-	}
+    private double hps;
 
-	public Date getStartDate() {
-		return startDate;
-	}
+    private List<HumanPlayerCharacter> humanPlayerCharacters = new ArrayList<HumanPlayerCharacter>();
 
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-		this.endDate = startDate; // sometimes no end fight is in the log file
-	}
+    private List<NonPlayerCharacter> nonPlayerCharacters = new ArrayList<NonPlayerCharacter>();
 
-	public Date getEndDate() {
-		return endDate;
-	}
+    private CalculatedResult calculatedResult;
 
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
-	
-	public double getDps() {
-		return dps;
-	}
+    public Fight(String name)
+    {
+        super();
+        this.name = name;
+    }
 
-	public void setDps(double dps) {
-		this.dps = dps;
-	}
+    public HumanPlayerCharacter findHumanPlayerCharacter(String name)
+    {
+        HumanPlayerCharacter result = new HumanPlayerCharacter(name);
 
-	public double getHps() {
-		return hps;
-	}
+        int index = humanPlayerCharacters.indexOf(result);
+        if (index > -1)
+        {
+            result = humanPlayerCharacters.get(index);
+        } else
+        {
+            result = null;
+        }
 
-	public void setHps(double hps) {
-		this.hps = hps;
-	}
+        return result;
+    }
 
-	public List<HumanPlayerCharacter> getHumanPlayerCharacters() {
-		return humanPlayerCharacters;
-	}
+    public NonPlayerCharacter findNonPlayerCharacter(String name)
+    {
+        NonPlayerCharacter result = new NonPlayerCharacter(name);
 
-	public void setHumanPlayerCharacters(
-			List<HumanPlayerCharacter> humanPlayerCharacters) {
-		this.humanPlayerCharacters = humanPlayerCharacters;
-	}
+        int index = nonPlayerCharacters.indexOf(result);
+        if (index > -1)
+        {
+            result = nonPlayerCharacters.get(index);
+        } else
+        {
+            result = null;
+        }
 
-	public List<NonPlayerCharacter> getNonPlayerCharacters() {
-		return nonPlayerCharacters;
-	}
+        return result;
+    }
 
-	public void setNonPlayerCharacters(List<NonPlayerCharacter> nonPlayerCharacters) {
-		this.nonPlayerCharacters = nonPlayerCharacters;
-	}
+    public String getName()
+    {
+        return name;
+    }
 
-	public CalculatedResult getCalculatedResult() {
-		return calculatedResult;
-	}
+    public void setName(String name)
+    {
+        this.name = name;
+    }
 
-	public void setCalculatedResult(CalculatedResult calculatedResult) {
-		this.calculatedResult = calculatedResult;
-	}	
+    public String getTargets()
+    {
+        return targets;
+    }
+
+    public void setTargets(String targets)
+    {
+        this.targets = targets;
+    }
+
+    public Date getStartDate()
+    {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate)
+    {
+        this.startDate = startDate;
+        this.endDate = startDate; // sometimes no end fight is in the log file
+    }
+
+    public Date getEndDate()
+    {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate)
+    {
+        this.endDate = endDate;
+    }
+
+    public double getDps()
+    {
+        return dps;
+    }
+
+    public void setDps(double dps)
+    {
+        this.dps = dps;
+    }
+
+    public double getHps()
+    {
+        return hps;
+    }
+
+    public void setHps(double hps)
+    {
+        this.hps = hps;
+    }
+
+    public List<HumanPlayerCharacter> getHumanPlayerCharacters()
+    {
+        return humanPlayerCharacters;
+    }
+
+    public void setHumanPlayerCharacters(
+            List<HumanPlayerCharacter> humanPlayerCharacters)
+    {
+        this.humanPlayerCharacters = humanPlayerCharacters;
+    }
+
+    public List<NonPlayerCharacter> getNonPlayerCharacters()
+    {
+        return nonPlayerCharacters;
+    }
+
+    public void setNonPlayerCharacters(List<NonPlayerCharacter> nonPlayerCharacters)
+    {
+        this.nonPlayerCharacters = nonPlayerCharacters;
+    }
+
+    public CalculatedResult getCalculatedResult()
+    {
+        return calculatedResult;
+    }
+
+    public void setCalculatedResult(CalculatedResult calculatedResult)
+    {
+        this.calculatedResult = calculatedResult;
+    }
 }
